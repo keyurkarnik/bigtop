@@ -1,4 +1,3 @@
-#!/bin/sh
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -14,15 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+Source: ranger
+Section: misc
+Priority: extra
+Maintainer: Bigtop <dev@bigtop.apache.org>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 0.7.1
+Homepage: http://ranger.apache.org
 
-. `dirname $0`/bigtop.bom
-
-
-mvn clean compile package assembly:assembly install -DskipTests -Drat.skip "$@"
-
-mkdir build
-for f in target/ranger*.tar.gz
-do
-	tar -C build -xf ${f}
-done
+Package:  ranger
+Architecture: all
+Description: The vision of Apache Ranger is to provide comprehensive security across the Apache Hadoop ecosystem.
+ With the advent of Apache YARN, the Hadoop platform can now support a true data lake architecture.
+ Enterprises can potentially run multiple workloads, in a multi tenant environment. Data security within Hadoop needs to evolve to support
+ multiple use cases for data access, while also providing a framework for central administration of security policies and monitoring of user access.

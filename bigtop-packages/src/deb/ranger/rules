@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/make -f
+#
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -13,16 +14,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# -*- makefile -*-
 
-set -e
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
 
-. `dirname $0`/bigtop.bom
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	bash debian/do-component-build -Dmaven.repo.local=${HOME}/.m2/repository
 
 
-mvn clean compile package assembly:assembly install -DskipTests -Drat.skip "$@"
 
-mkdir build
-for f in target/ranger*.tar.gz
-do
-	tar -C build -xf ${f}
-done
+override_dh_install:
+	bash -x debian/install_ranger_comps.sh
+	install -d -m 0755 debian/tmp/etc/init.d

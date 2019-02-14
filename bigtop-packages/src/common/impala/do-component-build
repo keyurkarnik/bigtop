@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -14,15 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -ex
 
 . `dirname $0`/bigtop.bom
 
 
-mvn clean compile package assembly:assembly install -DskipTests -Drat.skip "$@"
-
-mkdir build
-for f in target/ranger*.tar.gz
-do
-	tar -C build -xf ${f}
-done
+//add build steps here

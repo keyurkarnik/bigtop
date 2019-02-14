@@ -1,4 +1,3 @@
-#!/bin/sh
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -14,15 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+Source: Apache Impala
+Section: misc
+Priority: extra
+Maintainer: Bigtop <dev@bigtop.apache.org>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.0.1
+Homepage: http://www.impala.apache.org
 
-. `dirname $0`/bigtop.bom
-
-
-mvn clean compile package assembly:assembly install -DskipTests -Drat.skip "$@"
-
-mkdir build
-for f in target/ranger*.tar.gz
-do
-	tar -C build -xf ${f}
-done
+Package: Impala
+Architecture: all
+Depends: bigtop-utils (>= 0.7)
+Description: Impala provides low latency and high concurrency for BI/analytic queries on Hadoop (not delivered by batch frameworks such as Apache Hive)
+ Impala also scales linearly, even in multitenant environments

@@ -466,5 +466,16 @@ bigtop {
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
+    'impala' {
+      name    = 'impala'
+      relNotes = 'Apache impala'
+      version { base = '3.0.1'; pkg = base; release = 1 }
+      tarball { destination = "apache-$name-${version.base}.tar.gz"
+                source      = destination }
+      url     { download_path = download_path = "/$name/${version.base}/"
+                site = "${apache.APACHE_MIRROR}/${download_path}"
+                archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
+    }
+
   }
 }
