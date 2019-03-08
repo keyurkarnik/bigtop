@@ -468,14 +468,23 @@ bigtop {
     }
     'impala' {
       name    = 'impala'
-      relNotes = 'Apache impala'
+      relNotes = 'Apache Impala'
       version { base = '3.0.1'; pkg = base; release = 1 }
       tarball { destination = "apache-$name-${version.base}.tar.gz"
                 source      = destination }
-      url     { download_path = download_path = "/$name/${version.base}/"
+      url     { download_path =  "/$name/${version.base}/"
                 site = "${apache.APACHE_MIRROR}/${download_path}"
                 archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
     }
-
+    'atlas' {
+      name    = 'atlas'
+      relNotes = 'Apache Atlas'
+      version { base = '1.1.0'; pkg = base; release = 1 }
+      tarball { destination = "apache-$name-${version.base}-sources.tar.gz"
+                source      = destination }
+      url     { download_path = "/$name/${version.base}/"
+                site = "${apache.APACHE_MIRROR}/${download_path}"
+                archive = "${apache.APACHE_ARCHIVE}/${download_path}" }
+    }
   }
 }
